@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request
 import requests
 import os
+import logging
 
 app = Flask(__name__)
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 WEATHER_API_KEY = '9eaeef6c3edb3d8913e46ac936dd3d2d'
 NEWS_API_KEY = '7d9217b300874c82b65259f84d41b63b'
@@ -12,8 +16,9 @@ def get_weather(city):
     response = requests.get(url)
     data = response.json()
 
-    if data.get("cod") != 200:
-        return {"city": city, "error": "City not found"}
+    logger.info("Request received for city  : %s", data.get("cod"))
+    if str(data.get("cod")) != "200":
+        return {"error": "City not found"}
 
     weather = {
         "city": data["name"],

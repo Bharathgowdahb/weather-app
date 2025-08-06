@@ -18,14 +18,14 @@ def get_weather(city):
 
     logger.info("Request received for city  : %s", data.get("cod"))
     if str(data.get("cod")) != "200":
-        return {"error": "City not found"}
-
-    weather = {
-        "city": data["name"],
-        "temperature": data["main"]["temp"],
-        "description": data["weather"][0]["description"],
-        "icon": data["weather"][0]["icon"]
-    }
+        weather = {"error": "City not found"}
+    else:  
+        weather = {
+             "city": data["name"],
+            "temperature": data["main"]["temp"],
+            "description": data["weather"][0]["description"],
+            "icon": data["weather"][0]["icon"]
+        }
 
     return weather
 

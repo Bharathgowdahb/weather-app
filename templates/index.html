@@ -23,6 +23,9 @@
                     <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Weather icon">
                 </div>
             </div>
+        {% else %}
+            <div class="alert alert-danger">{{ weather.error }}</div>
+            
         {% endif %}
 
         {% if weather.news %}
